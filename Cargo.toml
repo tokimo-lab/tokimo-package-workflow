@@ -1,0 +1,32 @@
+[package]
+name = "tokimo-package-workflow"
+version = "0.1.0"
+edition = "2024"
+authors = ["William Chan <root@williamchan.me>"]
+license = "MIT"
+description = "A programmable workflow engine with Rhai scripting, cron scheduling, JSONPath filtering, and extensible node-based execution."
+repository = "https://github.com/tokimo-lab/tokimo-package-workflow"
+homepage = "https://github.com/tokimo-lab/tokimo-package-workflow"
+readme = "README.md"
+keywords = ["workflow", "automation", "rhai", "cron", "engine"]
+categories = ["development-tools"]
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+thiserror = "2"
+tracing = "0.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = { version = "1", features = ["v4"] }
+chrono = { version = "0.4", features = ["serde"] }
+async-trait = "0.1"
+rhai = { version = "1", features = ["sync"] }
+regex = "1"
+dashmap = "6"
+reqwest = { version = "0.13", features = ["form", "json", "multipart", "query"] }
+tokio-cron-scheduler = "0.15"
+jsonpath-rust = "1"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full", "test-util"] }
+tracing-subscriber = "0.3"
