@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+use serde_json::json;
 use tokimo_package_workflow::ThinkFlow;
 use tokimo_package_workflow::engine::executor::FlowStatus;
 use tokimo_package_workflow::engine::task_manager::TaskStatus;
@@ -7,7 +8,6 @@ use tokimo_package_workflow::model::flow::FlowDefinition;
 use tokimo_package_workflow::model::node::*;
 use tokimo_package_workflow::model::variable::Variable;
 use tokimo_package_workflow::node::traits::NodeResult;
-use serde_json::json;
 
 // ---------------------------------------------------------------------------
 // Helpers
