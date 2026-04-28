@@ -68,17 +68,26 @@ async fn execute_shell(node: NodeData, ctx: ExecutionContext, local_vars: Variab
 
     info!(command = %command, "Shell execution");
 
-    // Build command
-    let mut cmd = tokio::process::Command::new("sh");
-    cmd.arg("-c");
-
     // Combine command with args
     let full_command = if args.is_empty() {
         command.clone()
     } else {
         format!("{} {}", command, args.join(" "))
     };
-    cmd.arg(&full_command);
+
+    // Build command (platform-specific shell)
+    #[cfg(windows)]
+    let mut cmd = {
+        let mut c = tokio::process::Command::new("cmd");
+        c.arg("/C").arg(&full_command);
+        c
+    };
+    #[cfg(not(windows))]
+    let mut cmd = {
+        let mut c = tokio::process::Command::new("sh");
+        c.arg("-c").arg(&full_command);
+        c
+    };
 
     if let Some(dir) = &working_dir {
         cmd.current_dir(dir);
